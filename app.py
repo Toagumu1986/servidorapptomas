@@ -1,16 +1,19 @@
 from fastapi import FastAPI 
 
-from starlette.staticfiles import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
 
 from routes.rutasAPI import rutas
 
 app=FastAPI()
 
-app.add_middleware
+#habilitar cors para permitir solicitudes desde todos los origenes
+
+app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Permite solicitudes desde cualquier origen. Ajusta según sea necesario.
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Permite todos los métodos HTTP. Ajusta según sea necesario.
+    allow_headers=["*"],  # Permite todas las cabeceras. Ajusta según sea necesario.
+)
 
 app.include_router(rutas)
